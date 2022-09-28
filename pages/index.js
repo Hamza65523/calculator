@@ -1,9 +1,32 @@
 import Head from 'next/head'
+import React,{useState} from 'react'
 import styles from '../styles/Home.module.css'
+import Image from 'next/image'
+import Delete from '../assests/delete.png'
 export default function Home() {
-  const handlerClick=(data)=>{
-    let text 
+  const [value,setValue]=useState('')
+  const [result,setResult]=useState()
+ 
+
+
+  const operatorHandler=(e)=>{
+    setValue(value.concat(e.target.name))
   }
+ const resultHandler=()=>{
+   try {
+    setValue(eval(value).toString())
+  } catch (error) {
+    setValue("ERROR")
+  }
+ }
+ const clearHandler=()=>{
+  setValue('')
+ }
+ const deleteHandler=()=>{
+  setValue(value.slice(0,-1))
+  
+ }
+ console.log(value)
   return (
     <div >
       <Head>
@@ -14,28 +37,32 @@ export default function Home() {
      <section className=''>
       <div className="flex items-center h-[100vh] bg-white">
       <div className="bg-black h-[500px] py-2  px-4 rounded-lg flex flex-col gap-2  max-w-[400px] mx-auto  my-0">
-        <input type="text" name="" className='text-right text-white text-xl font-[500] w-full bg-gray-500  rounded-md py-2 mt-4 px-2' id="" />
+        <input type="text" value={value==''?'0':value} name="" className='text-right text-white text-xl font-[500] w-full bg-gray-500  rounded-md py-2 mt-4 px-2' id="" />
         <div className="flex gap-1  flex-wrap ">
-        <span onClick={()=>handlerClick('clear')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-400 text-center '>AC</span>
-        <span onClick={()=>handlerClick('()')} className='lg:w-[89px] cursor-pointer lg:text-3xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-yellow-400 text-center'>( )</span>
-        <span onClick={()=>handlerClick('%')} className='lg:w-[89px] cursor-pointer lg:text-3xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-yellow-400 text-center'>%</span>
-        <span onClick={()=>handlerClick('÷')} className='lg:w-[89px] cursor-pointer lg:text-3xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-yellow-400 text-center'>÷</span>
-        <span onClick={()=>handlerClick('7')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>7</span>
-        <span onClick={()=>handlerClick('8')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>8</span>
-        <span onClick={()=>handlerClick('9')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>9</span>
-        <span onClick={()=>handlerClick('x')} className='lg:w-[89px] cursor-pointer lg:text-3xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-yellow-400 text-center'>x</span>
-        <span onClick={()=>handlerClick('4')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>4</span>
-        <span onClick={()=>handlerClick('5')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>5</span>
-        <span onClick={()=>handlerClick('6')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>6</span>
-        <span onClick={()=>handlerClick('-')} className='lg:w-[89px] cursor-pointer lg:text-3xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-yellow-400 text-center'>-</span>
-        <span onClick={()=>handlerClick('1')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>1</span>
-        <span onClick={()=>handlerClick('2')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>2</span>
-        <span onClick={()=>handlerClick('3')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>3</span>
-        <span onClick={()=>handlerClick('+')} className='lg:w-[89px] cursor-pointer lg:text-3xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-yellow-400 text-center'>+</span>
-        <span onClick={()=>handlerClick('0')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>0</span>
-        <span onClick={()=>handlerClick('.')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>.</span>
-        <span onClick={()=>handlerClick('delete')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-gray-500 text-center'>icon</span>
-        <span onClick={()=>handlerClick('=')} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center'>=</span>
+          
+        
+        <button onClick={deleteHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='delete'><Image src={Delete} alt="" 
+            height={80}
+            width={60}
+            /></button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='('>(</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name=')'>)</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='1'>1</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='2'>2</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='3'>3</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='4'>4</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='5'>5</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='7'>7</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='8'>8</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='9'>9</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='0'>0</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='+'>+</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='-'>-</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='/'>/</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='*'>x</button>
+        <button onClick={operatorHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='.'>.</button>
+        <button onClick={resultHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='='>=</button>
+        <button onClick={clearHandler} className='lg:w-[89px] cursor-pointer lg:text-2xl lg:font-[500] lg:text-white lg:flex lg:items-center lg:justify-center lg:h-[60px] rounded-full bg-green-500 text-center' name='Clear'>Clear</button>
         </div>
       </div>
       </div>
